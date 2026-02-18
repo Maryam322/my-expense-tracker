@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker | Manage Your Finances</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for Visuals -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Expense Tracker</h1>
+            <p>Track your financial flow with ease.</p>
+        </header>
+        <div class="dashboard-grid">
+            <!-- Total Balance Header -->
+            <div class="total-balance-display">
+                <h2>Total Balance</h2>
+                <h1 id="balance">PKR 0.00</h1>
+            </div>
+            <!-- Income Card -->
+            <div class="card chart-card income-chart-card">
+                <div class="card-header-custom">
+                    <h2>Income</h2>
+                    <h1 id="money-plus" class="money plus">+PKR 0.00</h1>
+                </div>
+                <div class="chart-container">
+                    <canvas id="incomeChart"></canvas>
+                </div>
+            </div>
+            <!-- Expense Card -->
+            <div class="card chart-card expense-chart-card">
+                <div class="card-header-custom">
+                    <h2>Expense</h2>
+                    <h1 id="money-minus" class="money minus">-PKR 0.00</h1>
+                </div>
+                <div class="chart-container">
+                    <canvas id="expenseChart"></canvas>
+                </div>
+            </div>
+            <div class="card main-action-card">
+                <!-- form -->
+                <div class="form-container">
+                    <form id="form">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="type">Type</label>
+                                <select id="type" onchange="toggleCategoryOptions()">
+                                    <option value="Income">Income</option>
+                                    <option value="Expense">Expense</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="category">Category</label>
+                                <select id="category">
+                                </select>
+                                <div class="form-group">
+                                    <label for="amount">Amount</label>
+                                    <input type="number" id="amount" placeholder="Amount" step="0.01" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="date">Date</label>
+                                    <input type="date" id="date" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+
+                                <button type="submit" id="btn-create" class="btn-create">CREATE</button>
+                            </div>
+                    </form>
+                </div>
+                <div class="list-container">
+                    <!-- transaction section list -->
+                    <ul id="list" class="list">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card budget-card">
+                <h3>Budget Overview</h3>
+                <button class="btn-icon" id="btn-icon" onclick="openBudgetModal()"><i class="fas fa-plus"></i></button>
+                <div id="budget-list" class="budget-list">
+                    <!-- Budgets added here -->
+                </div>
+            </div>
+            <div class="card bills-card">
+                <!-- bill section -->
+                <h3>Recurring Bills
+                    <button class="btn-icon" onclick="openBillModal()"><i class="fas fa-plus"></i>
+                    </button>
+                </h3>
+                <ul id="bills-list" class="bills-list"></ul>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="budget-modal" class="modal">
+            <div class="modal-content card">
+                <span class="close" onclick="closeBudgetModal()">&times;</span>
+                <h3>Set Budget</h3>
+                <form id="budget-form">
+                    <div class="form-control">
+                        <label for="budget-category">Category</label>
+                        <select id="budget-category">
+                            <option value="Food">Food</option>
+                            <option value="Rent">Rent</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Health">Health</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-control">
+                        <label for="budget-amount">Limit Amount</label>
+                        <input type="number" id="budget-amount" placeholder="Enter limit..." min="0" step="0.01">
+                    </div>
+                    <button class="btn">Save Budget</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="bill-modal" class="modal">
+            <div class="modal-content card">
+                <span class="close" onclick="closeBillModal()">&times;</span>
+                <h3>Add Recurring Bill</h3>
+                <form id="bill-form" class="bill-form">
+                    <div class="form-control">
+                        <label for="bill-name">Bill Name</label>
+                        <input id="bill-name" name="bill-name" type="text" placeholder="e.g. Netflix">
+                    </div>
+                    <div class="form-control">
+                        <label for="bill-amount">Amount</label>
+                        <input type="number" id="bill-amount" name="bill-amount" placeholder="Amount" min="0"
+                            step="0.01">
+                    </div>
+                    <div class="form-control">
+                        <label for="bill-date">Due Date (Day of Month)</label>
+                        <input type="number" id="bill-date" name="bill-date" placeholder="1-31" min="1" max="31">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn" onclick="addBill()">Add Bill</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

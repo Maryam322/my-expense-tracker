@@ -1,0 +1,564 @@
+:root {
+    /* Brand Colors */
+    --primary-color: #0f766e;
+    /* Deep Teal */
+    --primary-hover: #115e59;
+    --background-color: #f1f5f9;
+    /* Slate 100 */
+    --card-surface: #ffffff;
+
+    /* Text Colors */
+    --text-primary: #1e293b;
+    /* Slate 800 */
+    --text-secondary: #64748b;
+    /* Slate 500 */
+
+    /* Status Colors */
+    --color-income: #10b981;
+    /* Emerald */
+    --color-expense: #ef4444;
+    /* Red */
+
+    /* Borders & Shadows */
+    --border-light: #e2e8f0;
+    --shadow-default: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+    /* Spacing & Radius */
+    --radius-lg: 12px;
+    --spacing-md: 1.5rem;
+
+    --font-stack: 'Outfit', system-ui, -apple-system, sans-serif;
+}
+/* Reset & Basics */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    min-height: 100vh;
+}
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+/* Header */
+header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+header h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin-bottom: 0.5rem;
+}
+header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1.5rem;
+}
+
+/* Total Balance Card */
+.total-balance-display {
+    grid-column: span 12;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    padding: 2.5rem;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: white;
+    box-shadow: var(--shadow-default);
+    margin-bottom: 1.5rem;
+}
+.total-balance-display h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    justify-content: center;
+}
+.total-balance-display h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0;
+}
+/* chat cards css */
+/* chat cards css */
+.chart-card {
+    grid-column: span 6;
+    background: var(--card-surface);
+    border-radius: var(--radius-lg);
+    padding: 2rem 1.5rem;
+    height: auto; /* Allow flexible height */
+    min-height: 350px;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-default);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    justify-content: flex-start;
+}
+
+.chart-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-header-custom {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-bottom: none;
+    padding-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-header-custom h2 {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    background-color: #e2e8f0;
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    width: fit-content;
+    margin: 0;
+}
+
+.card-header-custom h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Remove specific colors for amount to match the dark text design, 
+   or keep them if the user just wanted alignment. The image showed dark text. */
+.income-chart-card .card-header-custom h1,
+.expense-chart-card .card-header-custom h1 {
+    color: var(--text-primary);
+}
+
+.chart-container {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.main-action-card {
+    grid-column: span 12;
+    background: var(--card-surface);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-default);
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+.main-action-card {
+    grid-column: span 12;
+    background: var(--card-surface);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-default);
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+/* Form Styles */
+.form-container {
+    width: 100%;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    align-items: end;
+    margin-bottom: 2rem;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select{
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--text-primary);
+    background-color: #f8fafc;
+    font-family: var(--font-stack);
+    transition: all 0.2s ease;
+}
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+/* Action Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-light);
+}
+.btn-create {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 2.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+.btn-create:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(15, 118, 110, 0.2);
+}
+/* transaction list */
+.list{
+    display:flex;
+    list-style:none ;
+    flex-direction:column ;
+    gap: 0.75rem;
+    max-width:500px;
+    overflow-y: auto;
+    padding: right;
+}
+.list li{
+
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 1rem 0.75rem;
+    background:#f1f5f9;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    transition: transform 0.2s, box-shadow 0.2s; 
+
+}
+.list li:hover{
+    transform: translateX(4px);
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+
+}
+.list-item-left{
+  display:flex;
+  align-items:center;
+  gap: 1.25rem;
+}
+.list-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+}
+.list-info{
+    display: flex;
+    flex-direction:column;
+}
+.list-category {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.list-subtext {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+.action-btn-container {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+}
+.list li:hover .action-btn-container {
+    opacity: 1;
+}
+.edit-btn,
+.delete-btn {
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.edit-btn:hover {
+    color: var(--primary-color);
+    background: rgba(15, 118, 110, 0.1);
+}
+
+.delete-btn:hover {
+    color: var(--color-expense);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.budget-card,
+.bills-card {
+    grid-column: span 6;
+    background: var(--card-surface);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-default);
+    border: 1px solid var(--border-light);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 100%;
+    min-height: 300px;
+}
+.budget-card:hover,
+.bills-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+}
+
+.budget-card h3,
+.bills-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.bills-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.btn-icon {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.budget-item {
+    margin-bottom: 1.25rem;
+}
+
+.budget-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+.budget-bar-container {
+    width: 100%;
+    height: 8px;
+    background-color: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.budget-bar {
+    height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+.budget-bar.warning {
+    background-color: #f59e0b;
+}
+
+.budget-bar.danger {
+    background-color: #ef4444;
+}
+.bill-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem;
+    background: #f8fafc;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    transition: transform 0.2s;
+}
+.bill-item:hover{
+    transform: translateX(2px);
+    border-color: var(--primary-color);
+
+}
+.bill-item span{
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+
+}
+.bill-item button{
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+.bill-item button:first-of-type {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+}
+
+.bill-item button:first-of-type:hover {
+    background-color: var(--primary-hover);
+}
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+ }
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 450px;
+    box-shadow: var(--shadow-hover);
+    position: relative;
+    border: 1px solid var(--border-light);
+    backdrop-filter: blur(4px);
+
+}
+
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+}
+/* Responsive Logic */
+@media (max-width: 1024px){
+    .dashboard-grid {
+        grid-template-columns: 1fr;}
+            .chart-card,
+    .main-action-card,
+    .total-balance-display,
+    .budget-card,
+    .bills-card {
+        grid-column: span 1;
+        /* Reset to single column stack */
+    }
+
+    .form-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2x2 grid for inputs */
+    }
+
+}
+@media (max-width: 640px) {
+    body {
+        padding: 1rem;
+    }
+
+    .total-balance-display h1 {
+        font-size: 2.5rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        /* Stack inputs fully */
+        gap: 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .btn-create {
+        width: 100%;
+    }
+}
+
+/* Scrollbar Polish */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
